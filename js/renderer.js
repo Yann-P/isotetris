@@ -16,7 +16,23 @@ var Renderer = Class.extend({
 			'left': $(window).width()/2  - $game.width()/2,
 			'top':  $(window).height()/2 - $game.height()/2
 		});
+		this.drawZones();
+		/*Temporaire: dessiner le centre*/
+		$('<div></div>').css({'position':'absolute','top':624/2, 'left':624/2, 'height':1, 'width':1, 'background-color':'red'}).appendTo('#game');
+		/*fin*/
+		
+	},
 
+	drawZones: function() {
+		for(var i = 0; i <= 19; i++) {
+			var $zone = $('<div></div>');
+			$zone.addClass('zone').css({
+				'width':  ((i*2) + 1) * 16,
+				'height': ((i*2) + 1) * 16,
+				'top':    (19 - i)    * 16,
+				'left':   (19 - i)    * 16 
+			}).appendTo('#game');
+		}
 	},
 
 	// Create a brick, or updates it if the .brick div was already placed.
