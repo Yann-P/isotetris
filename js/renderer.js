@@ -45,6 +45,7 @@ var Renderer = Class.extend({
 			$brick.addClass('brick').attr({
 				'data-id': brick.id,
 				'data-type': brick.type,
+				'data-side': brick.side,
 				'data-x': brick.position.x,
 				'data-y': brick.position.y
 			}).appendTo('#game');
@@ -77,6 +78,29 @@ var Renderer = Class.extend({
 			'top': y * 16,
 			'background-color': color
 		}).appendTo($container);
+	},
+
+	// Makes shake the controlled brick.
+	setAnimatedBrick: function(brick) {
+		var $brick = $('.brick[data-id="' + brick.id + '"]');
+		$('.brick').removeClass('animated');
+		$brick.addClass('animated');
+	},
+
+	// Highlights bricks on the active side.
+	highlightBricksFromSide: function(side) {
+		$('.brick').css('opacity', 0.7);
+		$('.brick[data-side="' + side + '"]').each(function() {
+			$(this).css('opacity', 1);
+		});
+	},
+
+	// Erases tiles from completed lines.
+	eraseTile: function(brick, position) {
+		var $brick = $('.brick[data-id="' + brick.id + '"]');
+		$brick.find('.tile[data-x="' + (position.x) + '"][data-y="' + (position.y) + '"]').each(function() {
+			$(this).fadeOut();
+		});
 	}
 
 });

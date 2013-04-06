@@ -9,7 +9,8 @@ var Game = Class.extend({
 		this.grid = [];
 		this.started = false;
 		this.ticks = 0;
-		this.activeSide = false; // Controlled by mouse in main.js
+		this.activeSide = 0; // Controlled by mouse in main.js
+		this.activeBrick = null;
 		this.updateInterval = 500;
 		this.setup();
 	},
@@ -35,23 +36,27 @@ var Game = Class.extend({
 		}, this.updateInterval, this);
 	},
 
-	moveBySide: function(side, direction) {
-		var brick = this.getFistBrickBySide(side);
-		if(!brick) return;
-		brick.move(direction);
+	setActiveSide: function(side) {
+		this.activeSide = side;
+		this.renderer.highlightBricksFromSide(side);
+		this.activeBrick = this.getFistBrickBySide(side);
+		this.renderer.setAnimatedBrick(this.activeBrick);
 	},
 
-	rotateBySide: function(side, direction) {
-		var brick = this.getFistBrickBySide(side);
-		if(!brick) return;
-		brick.rotate();
+	moveActiveBrick: function(direction) {
+		if(this.activeBrick) this.activeBrick.move(direction);
+	},
+
+	rotateActiveBrick: function(direction) {
+		if(this.activeBrick) this.activeBrick.rotate();
 	},
 
 	getFistBrickBySide: function(side) {
 		for(var i = 0; i < this.bricks.length ; i++) {
 			var brick = this.bricks[i];
-			if(brick.side == side && !brick.fixed && brick.side !== false)
+			if(brick.side == side && !brick.fixed && brick.side !== false) {
 				return brick;
+			}
 		}
 		return false;
 	},
@@ -134,10 +139,7 @@ var Game = Class.extend({
 				x: position.x - brick.position.x,
 				y: position.y - brick.position.y
 			};
-		console.log(position.x);
-		$('.brick[data-id="'+brick.id+'"]').find('.tile[data-x="'+(brickPosition.x)+'"][data-y="'+(brickPosition.y)+'"]').each(function() {
-			$(this).remove();
-		});
+		this.renderer.eraseTile(brick, brickPosition);
 		this.grid[position.y][position.x] = -1;
 		brick.grids[brick.orientation][brickPosition.y][brickPosition.x] = 0;
 	},
