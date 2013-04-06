@@ -1,4 +1,24 @@
 body {
 	margin: 0;
-	background: #333;
+	background: url("../img/background.png") #333;
+	color: #DDD;
+	font-family: arial;
+	font-size: 14px;
+	text-shadow: 0px 2px 0 black;
+}
+
+h3 {
+	color: white;
+}
+
+#rules {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 250px;
+}
+
+a {
+	text-decoration: none;
+	color: #09E;
 }

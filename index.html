@@ -2,11 +2,25 @@
 <html>
 <head>
 	<title>IsoTetris</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 <body>
-	<div id="game"></div>
+	<div id="rules">
+		<h3>Règles</h3>
+		Ce Tetris se joue autour de la pièce centrale.<br>
+		Contrôlez une partie du jeu en passant votre souris dessus et dirigez la pièce avec les flèches directionnelles.<br>
+		<br>
+		Par <a href="http://yann-p.fr/">Yann P.</a><br />
+		<a href="https://github.com/Yann-P/isotetris/">Sources du jeu</a>
+	</div>
+	<div id="game">
+		<div class="side side-top" data-side="0"></div>
+		<div class="side side-right" data-side="1"></div>
+		<div class="side side-bottom" data-side="2"></div>
+		<div class="side side-left" data-side="3"></div>
+	</div>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
 	<script type="text/javascript" src="js/lib/class.js"></script>
 	<script type="text/javascript" src="js/util.js"></script>

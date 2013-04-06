@@ -17,12 +17,9 @@ var Renderer = Class.extend({
 			'top':  $(window).height()/2 - $game.height()/2
 		});
 		this.drawZones();
-		/*Temporaire: dessiner le centre*/
-		$('<div></div>').css({'position':'absolute','top':624/2, 'left':624/2, 'height':1, 'width':1, 'background-color':'red'}).appendTo('#game');
-		/*fin*/
-		
 	},
 
+	// Draws dotted zones for "rows"
 	drawZones: function() {
 		for(var i = 0; i <= 19; i++) {
 			var $zone = $('<div></div>');
