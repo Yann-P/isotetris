@@ -15,7 +15,7 @@ var Game = Class.extend({
 
 	// Places the initial tile and starts the game
 	setup: function() {
-		this.insertInitialPiece();
+		this.insertInitialBrick();
 		this.start();
 		this.updateGrid();
 	},
@@ -24,15 +24,15 @@ var Game = Class.extend({
 	mainLoop: function() {
 		var self = this;
 		if(!this.started) return;
-		this.nextPiecesPositions();
+		this.nextBricksPositions();
 		this.ticks++;
 		setTimeout(function() {
 			self.mainLoop();
-		}, 500);
+		}, 300);
 	},
 
 	// Applies gravity to bricks
-	nextPiecesPositions: function() {
+	nextBricksPositions: function() {
 		for(var i = 0; i < this.bricks.length; i++) {
 			var brick = this.bricks[i],
 				newPosition = {
@@ -48,7 +48,8 @@ var Game = Class.extend({
 				case 3: newPosition.x = brick.position.x + 1; break;
 			}
 
-			brick.updatePosition(newPosition);
+			if(!brick.collides(newPosition))
+				brick.updatePosition(newPosition);
 		}
 		this.updateGrid();
 	},
@@ -58,31 +59,30 @@ var Game = Class.extend({
 		for(var x = 0; x < 39; x++) { // New blank grid
 			this.grid[x] = [];
 			for(var y = 0; y < 39; y++) {
-				this.grid[x][y] = 0;
+				this.grid[x][y] = -1;
 			}
 		}
-		for(var i = 0; i < this.bricks.length; i++) {
+		for(var i = 0; i < this.bricks.length; i++) { 
 			var brick = this.bricks[i],
 				brickGrid = brick.grids[brick.orientation];
 			for(var x = 0; x < brickGrid[0].length; x++) {
 				for(var y = 0; y < brickGrid.length; y++) {
-					if(brickGrid[y][x])
-						this.grid[y+brick.position.y][x+brick.position.x] = 1;
+					if(brickGrid[y][x]) // Fill the grid with brick id when there is a tile at (x, y)
+						this.grid[y + brick.position.y][x + brick.position.x] = brick.id;
 				}
 			}
 		}
-		console.log(JSON.stringify(this.grid));
 	},
 
 	// Inserts a brick on the game
-	insertPiece: function(type, position, orientation, side) {
+	insertBrick: function(type, position, orientation, side) {
 		var id = this.bricks.length,
 			brick = new Brick(this, id, type, position, orientation, side);
 		this.bricks.push(brick);
 	},
 
 
-	insertPieceFrom: function(type, side) {
+	insertBrickFrom: function(type, side) {
 		var position, orientation;
 		switch(side) {
 			case 0:  position = { x: 19, y: 0  }; orientation = 0; break;
@@ -90,14 +90,14 @@ var Game = Class.extend({
 			case 2:  position = { x: 19, y: 40 }; orientation = 2; break;
 			case 3:  position = { x: 0,  y: 19 }; orientation = 3; break;
 		}
-		this.insertPiece(type, position, orientation, side);
+		this.insertBrick(type, position, orientation, side);
 	},
 
-	insertInitialPiece: function() {
+	insertInitialBrick: function() {
 		var type = Math.floor(Math.random() * Data.bricks.length),
 			orientation = Math.floor(Math.random() * 4),
 			position = { x: 19, y: 19 };
-		this.insertPiece(type, position, orientation, false);
+		this.insertBrick(type, position, orientation, false);
 	},
 
 	start: function() {
