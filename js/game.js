@@ -38,8 +38,11 @@ var Game = Class.extend({
 
 	setActiveSide: function(side) {
 		this.activeSide = side;
-		this.renderer.highlightBricksFromSide(side);
-		this.activeBrick = this.getFistBrickBySide(side);
+		this.updateActiveBrick();
+	},
+
+	updateActiveBrick: function() {
+		this.activeBrick = this.getFistBrickBySide(this.activeSide);
 		this.renderer.setAnimatedBrick(this.activeBrick);
 	},
 
@@ -110,6 +113,7 @@ var Game = Class.extend({
 			}
 			else {
 				brick.fixed = true;
+				this.updateActiveBrick();
 				this.updateGrid();
 				if(brick.hasPartOut(brick.position, true)) {
 					brick.highlight();
@@ -231,6 +235,11 @@ var Game = Class.extend({
 			result.push([start, y]);
 		}
 		return result; // [[x, y], [x, y],...]
+	},
+
+	clear: function() {
+		this.stop();
+		this.renderer.clear();
 	}
 
 });

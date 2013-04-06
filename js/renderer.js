@@ -11,12 +11,12 @@ var Renderer = Class.extend({
 
 	// Centers the #game div on the screen
 	setup: function() {
-		var $game = $('#game');
-		$game.css({
-			'left': $(window).width()/2  - $game.width()/2,
-			'top':  $(window).height()/2 - $game.height()/2
-		});
 		this.drawZones();
+	},
+
+	// Triggers the view.
+	triggerGameIsometric: function() {
+		$('#game').toggleClass('isometric');
 	},
 
 	// Draws dotted zones for "rows"
@@ -87,20 +87,17 @@ var Renderer = Class.extend({
 		$brick.addClass('animated');
 	},
 
-	// Highlights bricks on the active side.
-	highlightBricksFromSide: function(side) {
-		$('.brick').css('opacity', 0.7);
-		$('.brick[data-side="' + side + '"]').each(function() {
-			$(this).css('opacity', 1);
-		});
-	},
-
 	// Erases tiles from completed lines.
 	eraseTile: function(brick, position) {
 		var $brick = $('.brick[data-id="' + brick.id + '"]');
 		$brick.find('.tile[data-x="' + (position.x) + '"][data-y="' + (position.y) + '"]').each(function() {
 			$(this).fadeOut();
 		});
+	},
+
+	// Clears the game zone for new game.
+	clear: function() {
+		$('.zone, .brick').remove();
 	}
 
 });
