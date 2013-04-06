@@ -1,52 +1,60 @@
+/*
+	Graphical rendering using DOM elements.
+*/
 var Renderer = Class.extend({
 
+	// Initialization
 	init: function(game) {
 		this.game = game;
 		this.setup();
 	},
 
+	// Centers the #game div on the screen
 	setup: function() {
 		var $game = $('#game');
 		$game.css({
 			'left': $(window).width()/2  - $game.width()/2,
 			'top':  $(window).height()/2 - $game.height()/2
 		});
+
 	},
 
-	drawPiece: function(piece) { // A TESTER avec les updates
-		var grid   = piece.grids[piece.orientation],
+	// Create a brick, or updates it if the .brick div was already placed.
+	drawBrick: function(brick) {
+		var grid   = brick.grids[brick.orientation],
 			width  = grid[0].length,
 			height = grid.length,
-			selector = ".piece[data-id='" + piece.id + "']",
-			pieceExists = $(selector).length == 1,
-			$piece = pieceExists ? $(selector) : $('<div></div>'); // Cas où la pièce existe déjà et on veut la mettre à jour
+			selector = ".brick[data-id='" + brick.id + "']",
+			brickExists = $(selector).length == 1,
+			$brick = brickExists ? $(selector) : $('<div></div>'); // If the brick already exists, select it ; or create a new div
 
-		if(!pieceExists) { // Création si elle n'existait pas
-			$piece.addClass('piece').attr({
-				'data-id': piece.id,
-				'data-type': piece.type,
-				'data-x': piece.position.x,
-				'data-y': piece.position.y
+		if(!brickExists) {
+			$brick.addClass('brick').attr({
+				'data-id': brick.id,
+				'data-type': brick.type,
+				'data-x': brick.position.x,
+				'data-y': brick.position.y
 			}).prependTo('#game');
 		}
 
-		$piece.css({ // Application / MàJ du style dans les deux cas
-			'left': piece.position.x * 16,
-			'top':  piece.position.y * 16,
+		$brick.css({ // Both the update and the brick creation actions needs this
+			'left': brick.position.x * 16,
+			'top':  brick.position.y * 16,
 			'width': width * 16,
 			'height': height * 16
 		});
 
-		$piece.empty(); // On vide la pièce des tiles si c'est une MàJ
+		$brick.empty(); // Remove all tiles if there were already some in the .brick element
 		for(var x = 0; x < width; x++) {
 			for(var y = 0; y < height; y++) {
 				if(grid[y][x])
-					this.drawTile($piece, x, y, piece.color);
+					this.drawTile($brick, x, y, brick.color);
 			}
 		}
 	},
 
-	drawTile: function($piece, x, y, color) {
+	// $container will be a .brick, except for the central tile.
+	drawTile: function($container, x, y, color) {
 		var $tile = $('<div></div>').addClass('tile').attr({
 			'data-x': x,
 			'data-y': y
@@ -55,7 +63,7 @@ var Renderer = Class.extend({
 			'left': x * 16,
 			'top': y * 16,
 			'background-color': color
-		}).appendTo($piece);
+		}).appendTo($container);
 	}
 
 });

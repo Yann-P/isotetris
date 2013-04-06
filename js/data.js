@@ -1,6 +1,6 @@
 var Data = {
 
-	pieces: [
+	bricks: [
 		{
 			grids: [
 				[
