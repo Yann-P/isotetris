@@ -50,12 +50,12 @@ var Renderer = Class.extend({
 				'data-type': brick.type,
 				'data-x': brick.position.x,
 				'data-y': brick.position.y
-			}).prependTo('#game');
+			}).appendTo('#game');
 		}
 
 		$brick.css({ // Both the update and the brick creation actions needs this
-			'left': brick.position.x * 16,
-			'top':  brick.position.y * 16,
+			'left': (brick.position.x - 4) * 16,
+			'top':  (brick.position.y - 4) * 16,
 			'width': width * 16,
 			'height': height * 16
 		});

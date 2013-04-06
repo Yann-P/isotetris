@@ -56,14 +56,15 @@ var Game = Class.extend({
 
 	// Updates the grid of tiles placed on the game
 	updateGrid: function() {
-		for(var x = 0; x < 39; x++) { // New blank grid
-			this.grid[x] = [];
-			for(var y = 0; y < 39; y++) {
+		var size = 47;		 			 // Because the grid needs space out of the viewport (which has a 39 tile size)
+		for(var x = 0; x < size; x++) {  // New blank grid
+			this.grid[x] = []; 				 
+			for(var y = 0; y < size; y++) {
 				this.grid[x][y] = -1;
 			}
 		}
 		for(var i = 0; i < this.bricks.length; i++) { 
-			var brick = this.bricks[i],
+			var brick     = this.bricks[i],
 				brickGrid = brick.grids[brick.orientation];
 			for(var x = 0; x < brickGrid[0].length; x++) {
 				for(var y = 0; y < brickGrid.length; y++) {
@@ -81,22 +82,27 @@ var Game = Class.extend({
 		this.bricks.push(brick);
 	},
 
-
+	// Inserts a brick from a side of the grid
 	insertBrickFrom: function(type, side) {
 		var position, orientation;
 		switch(side) {
-			case 0:  position = { x: 19, y: 0  }; orientation = 0; break;
-			case 1:  position = { x: 40, y: 19 }; orientation = 1; break;
-			case 2:  position = { x: 19, y: 40 }; orientation = 2; break;
-			case 3:  position = { x: 0,  y: 19 }; orientation = 3; break;
+			case 0:  position = gridPosition({ x: 19, y: -4  }); orientation = 0; break;
+			case 1:  position = gridPosition({ x: 40, y: 19  }); orientation = 1; break;
+			case 2:  position = gridPosition({ x: 19, y: 40  }); orientation = 2; break;
+			case 3:  position = gridPosition({ x: -4, y: 19  }); orientation = 3; break;
 		}
 		this.insertBrick(type, position, orientation, side);
 	},
 
+	// Inserts the central brick.
 	insertInitialBrick: function() {
 		var type = Math.floor(Math.random() * Data.bricks.length),
 			orientation = Math.floor(Math.random() * 4),
-			position = { x: 19, y: 19 };
+			size = { // Used to center the brick as good as possible using its size
+				width:  Data.bricks[type].grids[orientation][0].length,
+				height: Data.bricks[type].grids[orientation].length
+			},
+			position = { x: 23 - Math.floor(size.width / 2), y: 23 - Math.floor(size.height / 2) };
 		this.insertBrick(type, position, orientation, false);
 	},
 
