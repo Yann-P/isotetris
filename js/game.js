@@ -3,7 +3,8 @@
 */
 var Game = Class.extend({
 
-	init: function() {
+	init: function(level) {
+		this.level = Data.levels[level];
 		this.renderer = new Renderer(this);
 		this.bricks = [];
 		this.grid = [];
@@ -12,6 +13,7 @@ var Game = Class.extend({
 		this.activeSide = 0; // Controlled by mouse in main.js
 		this.activeBrick = null;
 		this.updateInterval = 500;
+		this.inputManager = new InputManager(this);
 		this.setup();
 	},
 
@@ -47,11 +49,15 @@ var Game = Class.extend({
 	},
 
 	moveActiveBrick: function(direction) {
-		if(this.activeBrick) this.activeBrick.move(direction);
+		if(!this.activeBrick || !this.started) 
+			return;
+		this.activeBrick.move(direction);
 	},
 
 	rotateActiveBrick: function(direction) {
-		if(this.activeBrick) this.activeBrick.rotate();
+		if(!this.activeBrick || !this.started)
+			return;
+		this.activeBrick.rotate();
 	},
 
 	getFistBrickBySide: function(side) {
@@ -130,6 +136,9 @@ var Game = Class.extend({
 								y: rowDone.tiles[t][1]
 							});
 						}
+						if(rowDone.distance == 1 && this.grid[23][23] != -1) { // If the fist row was compelted, get rid of the center tile
+							this.removeTile({ x: 23, y: 23 });
+						}
 					}
 				}
 			}
@@ -192,6 +201,7 @@ var Game = Class.extend({
 			case 3:  position = gridPosition({ x: -4, y: 19  }); orientation = 3; break;
 		}
 		this.insertBrick(type, position, orientation, side);
+		this.updateActiveBrick();
 	},
 
 	// Inserts the central brick.
@@ -237,8 +247,38 @@ var Game = Class.extend({
 		return result; // [[x, y], [x, y],...]
 	},
 
+	// User inputs. Called by inputmanager
+	keyCallback: function(key) {
+		switch(key) {
+			case keys.up:
+				if(this.activeSide == 3 || this.activeSide == 1 || this.activeSide == 2)
+					this.moveActiveBrick(2);
+				break;
+			case keys.right:
+				if(this.activeSide == 0 || this.activeSide == 2 || this.activeSide == 3)
+					this.moveActiveBrick(3);
+				break;
+			case keys.down:
+				if(this.activeSide == 3 || this.activeSide == 1 || this.activeSide == 0)
+				this.moveActiveBrick(0);
+				break;
+			case keys.left:
+				if(this.activeSide == 0 || this.activeSide == 2|| this.activeSide == 1)
+				this.moveActiveBrick(1);
+				break;
+			case keys.space:
+				this.rotateActiveBrick();
+				break;
+		}
+	},
+
+	clickCallback: function() {
+		this.rotateActiveBrick();
+	},
+
 	clear: function() {
 		this.stop();
+		this.inputManager.clear();
 		this.renderer.clear();
 	}
 

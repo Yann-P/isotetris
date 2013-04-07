@@ -1,5 +1,11 @@
 var Data = {
 
+	levels: [
+		{
+			lol: 1
+		}
+	],
+
 	bricks: [
 		{
 			grids: [
@@ -20,7 +26,7 @@ var Data = {
 					[1, 1]
 				]
 			],
-			color: 'red'
+			color: 'yellow'
 		},
 		{
 			grids: [
@@ -43,7 +49,7 @@ var Data = {
 					[1, 1, 1, 1]
 				]
 			],
-			color: 'orange'
+			color: 'cyan'
 		},
 		{
 			grids: [
@@ -66,7 +72,7 @@ var Data = {
 					[1, 0]
 				]
 			],
-			color: 'lime'
+			color: 'magenta'
 		},
 		{
 			grids: [
@@ -89,7 +95,7 @@ var Data = {
 					[0, 1]
 				]
 			],
-			color: 'cyan'
+			color: 'red'
 		},
 		{
 			grids: [
@@ -112,7 +118,7 @@ var Data = {
 					[0, 1]
 				]
 			],
-			color: 'blue'
+			color: 'lime'
 		},
 		{
 			grids: [
@@ -135,7 +141,30 @@ var Data = {
 					[1, 1, 1]
 				]
 			],
-			color: 'magenta'
+			color: 'orange'
+		},
+		{
+			grids: [
+				[
+					[1, 1],
+					[0, 1],
+					[0, 1]
+				],
+				[
+					[0, 0, 1],
+					[1, 1, 1]
+				],
+				[
+					[1, 0],
+					[1, 0],
+					[1, 1]
+				],
+				[
+					[1, 1, 1],
+					[1, 0, 0]
+				]
+			],
+			color: 'blue'
 		}
 	]
 }
