@@ -27,7 +27,7 @@ var InputManager = Class.extend({
 				else { // Not supposed to happen. If so, reset keysFrozen.
 					self.keysFrozen = [];
 				}
-			}, 100, this);
+			}, 110, this);
 		}
 	},
 
@@ -51,7 +51,7 @@ var InputManager = Class.extend({
 		}
 		setTimeout(function(self) {
 			self.mainLoop();
-		}, 100, this);
+		}, 110, this);
 	},
 
 	startListening: function() {
@@ -74,11 +74,22 @@ var InputManager = Class.extend({
 			self.game.setActiveSide(parseInt($(this).data('side')));
 			self.game.renderer.highlightActiveSide();
 		});
+
+		$('#pause').bind('click', function() {
+			self.game.pauseCallback();
+		});
+
+		$('.control').bind('click', function() {
+			var action = $(this).attr('data-action');
+			self.game.controlCallback(action);
+		});
 	},
 
 	stopListening: function() {
 		$(document).unbind('click keydown keyup');
 		$('.side').unbind('mouseover');
+		$('#pause').unbind('click');
+		$('.control').unbind('click');
 	},
 
 	clear: function() {

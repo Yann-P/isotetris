@@ -9,16 +9,28 @@
 <body>
 	<div id="menu">
 		<img src="img/logo.png" id="logo" />
-		<div class="slide" data-title="main">
-
-			
-			
-
+		<div class="slide box" data-title="gameover-space">
+			<h1>Game over</h1>
+			<b>Une brique a atteint le sommet...</b><br>
+			<br>
+			Rappelez-vous que si deux briques venant de sens opposés se rencontrent, elles se stabiliseront, même au milieu de nulle-part ;)<br>
+			<br>
+			<input type="button" class="button navigation" data-link="main" value="Recommencer !">
+		</div>
+		<div class="slide box" data-title="gameover-out">
+			<h1>Game over</h1>
+			<b>Une brique est tombée dans le vide...</b><br>
+			<br>
+			Rappelez-vous qu'une brique venant d'un côté n'est contrôlable que depuis le côté d'où elle vient ;)<br>
+			<br>
+			<input type="button" class="button navigation" data-link="main" value="Recommencer !">
+		</div>
+		<div class="slide box" data-title="main">
 			<table style="width: 100%">
 				<tr id="presentation">
 					<td>
 						<b>IsoTeris</b> est un tetris hors du commun où les briques, venant des 4 côtés du jeu, s'empilent contre la brique centrale du jeu.<br>
-						Oubliez les lignes de tetris, ici, vous devez compléter des carrés !<br>
+						Oubliez les lignes de Tetris : ici, vous devez compléter des carrés !<br>
 						<br>
 						<div id="credits">
 							Par <a href="http://yann-p.fr/">Yann P.</a><br>
@@ -33,7 +45,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="slide" data-title="tutorial">
+		<div class="slide box" data-title="tutorial">
 			<table>
 				<tr>
 					<td><img src="http://i.imgur.com/xoBoNX2.png"></td>
@@ -63,7 +75,17 @@
 			</table>
 		</div>
 	</div>
-	<div id="game">
+	<div id="game" class="box">
+		<div id="pause">Pause</div>
+		<div id="game-menu" class="box">
+			<h1>Jeu en pause</h1>
+			<table style="width:100%">
+				<tr>
+					<td><input type="button" class="button control" data-action="resume" value="Reprendre"></td>
+					<td><input type="button" class="button control" data-action="abort" value="Abandonner"></td>
+				</tr>
+			</table>
+		</div>
 		<table id="keys">
 			<tr>
 				<td></td>

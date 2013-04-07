@@ -6,12 +6,6 @@ var Renderer = Class.extend({
 	// Initialization
 	init: function(game) {
 		this.game = game;
-		this.setup();
-	},
-
-	// Centers the #game div on the screen
-	setup: function() {
-		this.drawZones();
 	},
 
 	// Makes the active side of the game brighter.
@@ -23,19 +17,6 @@ var Renderer = Class.extend({
 	// Triggers the view.
 	triggerGameIsometric: function() {
 		$('#game').toggleClass('isometric');
-	},
-
-	// Draws dotted zones for "rows"
-	drawZones: function() {
-		for(var i = 0; i < 19; i++) {
-			var $zone = $('<div></div>');
-			$zone.addClass('zone').css({
-				'width':  ((i*2) + 1) * 16,
-				'height': ((i*2) + 1) * 16,
-				'top':    (19 - i)    * 16,
-				'left':   (19 - i)    * 16
-			}).appendTo('#game');
-		}
 	},
 
 	// Create a brick, or updates it if the .brick div was already placed.
@@ -101,8 +82,17 @@ var Renderer = Class.extend({
 		});
 	},
 
+	openGameMenu: function() {
+		$('#game-menu').show();
+	},
+
+	closeGameMenu: function() {
+		$('#game-menu').hide();
+	},
+
 	// Clears the game zone for new game.
 	clear: function() {
+		this.closeGameMenu();
 		$('.zone, .brick').remove();
 		$('.side').removeClass('bright');
 	}

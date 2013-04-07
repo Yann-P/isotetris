@@ -111,7 +111,7 @@ var Game = Class.extend({
 			}
 
 			if(brick.hasPartOut(newPosition, false)) { // Out of grid range !
-				alert('Oops.\nVous avez perdu une brique ?');
+				gameOver('out');
 				return this.stop();
 			}
 			if(!brick.collides(newPosition)) {
@@ -123,7 +123,7 @@ var Game = Class.extend({
 				this.updateGrid();
 				if(brick.hasPartOut(brick.position, true)) {
 					brick.highlight();
-					alert('Oops.\nÀ court de place ?');
+					gameOver('space');
 					return this.stop();
 				}
 				var rowsDone = this.checkRows();
@@ -275,6 +275,26 @@ var Game = Class.extend({
 	clickCallback: function() {
 		this.rotateActiveBrick();
 	},
+
+	pauseCallback: function() {
+		if(!this.started) 
+			return;
+		this.renderer.openGameMenu();
+		this.stop();
+	},
+
+	controlCallback: function(action) {
+		switch(action) {
+			case "resume":
+				this.start();
+				this.renderer.closeGameMenu();
+				break;
+			case "abort":
+				titleScreen();
+				break;
+		}
+	},
+
 
 	clear: function() {
 		this.stop();

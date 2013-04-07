@@ -25,7 +25,7 @@ table td {
 	color: white;
 	text-shadow: -1px 1px 0 rgba(0, 0, 0, 1);
 	font-family: arial;
-	background: rgba(5, 30, 40, 0.3);
+	background: rgba(5, 30, 40, 0.5);
 	box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2) inset;
 	border-radius: 5px;
 	width: 100%;
@@ -33,7 +33,7 @@ table td {
 }
 
 .button:hover {
-	background: rgba(5, 30, 40, 0.5);
+	background: rgba(5, 30, 40, 0.7);
 }
 
 #game, #menu {
@@ -45,6 +45,32 @@ table td {
 
 #game {
 	display: none;
+	background: url("../img/grid.png");
+}
+
+.box {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2) inset,
+				0 0 50px rgba(255, 255, 255, 0.05);
+	border-radius:10px;
+}
+
+#game-menu {
+	display: none;
+	position: absolute;
+	width: 400px;
+	height: 150px;
+	top: 237px;
+	left: 112px;
+	z-index: 20;
+	background: #444A4F;
+	background: -webkit-linear-gradient(#555A5F, #333A3F);
+}
+
+#game-menu h1 {
+	text-align: center;
+	font-size: 25px;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7);
 }
 
 #menu {
@@ -67,11 +93,8 @@ table td {
 
 #menu .slide {
 	display: none;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(0, 0, 0, 0.5);
 	padding: 20px;
-	box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1) inset;
-	border-radius: 5px;
+	background: rgba(0, 0, 0, 0.1);
 }
 
 #menu .slide img {

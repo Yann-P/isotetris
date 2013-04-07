@@ -1,32 +1,26 @@
 @keyframes shake
 {
 	0%   { transform:rotate(-3deg); }
-	25%  { transform:rotate(0deg); }
-	75%  { transform:rotate(3deg); }
+	50%  { transform:rotate(3deg); }
 	100% { transform:rotate(-3deg); }
 }
-
-@-moz-keyframes shake /* Firefox */
-{
-	0%   { -moz-transform:rotate(-3deg); }
-	25%  { -moz-transform:rotate(0deg); }
-	75%  { -moz-transform:rotate(3deg); }
-	100% { -moz-transform:rotate(-3deg); }
-}
-
-@-webkit-keyframes shake /* Safari and Chrome */
+@-webkit-keyframes shake
 {
 	0%   { -webkit-transform:rotate(-3deg); }
-	25%  { -webkit-transform:rotate(0deg); }
-	75%  { -webkit-transform:rotate(3deg); }
+	50%  { -webkit-transform:rotate(3deg); }
 	100% { -webkit-transform:rotate(-3deg); }
 }
-
-@-o-keyframes shake /* Opera */
+@-moz-keyframes shake
+{
+	0%   { -moz-transform:rotate(-3deg); }
+	50%  { -moz-transform:rotate(3deg); }
+	100% { -moz-transform:rotate(-3deg); }
+}
+@-o-keyframes shake
 {
 	0%   { -o-transform:rotate(-3deg); }
-	50%  { -o-transform:rotate(0deg); }
-	100% { -o-transform:rotate(3deg); }
+	50%  { -o-transform:rotate(3deg); }
+	100% { -o-transform:rotate(-3deg); }
 }
 
 .side {
@@ -34,7 +28,7 @@
 	position: absolute;
 	width: 440px; /* 624 / sqrt(2) */
 	height: 440px;
-	background: rgba(0, 0, 0, 0.1);
+	background: url("../img/side.png");
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -42,7 +36,7 @@
 }
 
 .side.bright {
-	background: transparent;
+	background: none;
 }
 
 .side-top {
@@ -65,20 +59,34 @@
 	left: -220px;
 }
 
-.zone {
-	border: 1px dotted rgba(255, 255, 255, 0.2);
-	position:absolute;
-	z-index: 4;
-}
-
 .brick {
+	z-index: 4;
 	opacity: 0.9;
 	position:absolute;
-	transition: all .2s;
-	-webkit-transition: all .2s;
-	-moz-transition: all .2s;
-	-o-transition: all .2s;
 	display:block;
+	transition-properties: left, top;
+	transition-duration: .1s;
+	-webkit-transition-properties: left, top;
+	-webkit-transition-duration: .1s;
+	-moz-transition-properties: left, top;
+	-moz-transition-duration: .1s;
+	-o-transition-properties: left, top;
+	-o-transition-duration: .1s;
+}
+
+#pause {
+	position: absolute;
+	cursor: pointer;
+	font-size: 13px;
+	top: 10px;
+	left: 10px;
+	z-index: 6;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	color: rgba(255, 255, 255, 0.5);
+}
+
+#pause:hover {
+	color: white;
 }
 
 #game.isometric .brick {
@@ -87,21 +95,13 @@
 
 #game .brick.animated {
 	opacity: 1;
-	animation: shake 0.2s linear infinite;
-	-webkit-animation: shake 0.2s linear infinite;
-	-moz-animation: shake 0.2s linear infinite;
-	-o-animation: shake 0.2s linear infinite;
 }
 
 #game.isometric .brick.animated {
-	animation: none;
 	-webkit-animation: none;
-	-moz-animation: none;
-	-o-animation: none;
 }
 
 .tile {
-	z-index: 3;
 	width: 16px;
 	height: 16px;
 	position: absolute;
