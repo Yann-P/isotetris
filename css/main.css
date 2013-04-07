@@ -4,18 +4,133 @@ body {
 	color: #DDD;
 	font-family: arial;
 	font-size: 14px;
-	text-shadow: 0px 2px 0 black;
 }
 
 h3 {
 	color: white;
 }
 
-#rules {
+table tr {
+	vertical-align: top;
+}
+
+table td {
+	padding: 10px;
+}
+
+.button {
+	font-size: 17px;
+	padding: 15px;
+	border: 1px solid rgba(0, 0, 0, 1);
+	color: white;
+	text-shadow: -1px 1px 0 rgba(0, 0, 0, 1);
+	font-family: arial;
+	background: rgba(5, 30, 40, 0.3);
+	box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2) inset;
+	border-radius: 5px;
+	width: 100%;
+	cursor: pointer;
+}
+
+.button:hover {
+	background: rgba(5, 30, 40, 0.5);
+}
+
+#game, #menu {
 	position: absolute;
-	top: 20px;
-	left: 20px;
-	width: 250px;
+	width: 624px;
+	height: 624px;
+	overflow: hidden;
+}
+
+#game {
+	display: none;
+}
+
+#menu {
+	z-index: 50;
+}
+
+#menu h1 {
+	font-size:20px;
+	margin: 0 0 10px 0;
+}
+
+#presentation {
+	font-size: 20px;
+}
+
+#presentation img {
+	width: 300px;
+	height: 300px;
+}
+
+#menu .slide {
+	display: none;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1) inset;
+	border-radius: 5px;
+}
+
+#menu .slide img {
+	box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
+	border: 1px solid #111;
+}
+
+#menu .slide[data-title="tutorial"] td {
+	opacity:0.9;
+	padding: 7px;
+	font-size: 13px;
+	vertical-align: top;
+}
+
+
+#menu .slide[data-title="tutorial"] ul {
+	padding-left: 10px;
+}
+
+#menu .slide[data-title="tutorial"] img {
+	height: 175px;
+	width: 175px;
+}
+
+#logo {
+	display: block;
+	margin: 10px auto 20px auto;
+}
+
+
+#game #keys {
+	display: none;
+}
+
+#game.isometric {
+	transform: rotate(-45deg) skew(15deg, 15deg);
+	-webkit-transform: rotate(-45deg) skew(15deg, 15deg);
+	-moz-transform: rotate(-45deg) skew(15deg, 15deg);
+	-o-transform: rotate(-45deg) skew(15deg, 15deg);
+	box-shadow: -80px 100px 50px rgba(0, 0, 0, 0.5);
+}
+
+#game.isometric #keys {
+	display:block;
+	position: absolute;
+	font-weight: bold;
+	font-size: 15px;
+	right: 20px;
+	bottom: 20px;
+	text-shadow: 0 1px 0 white;
+}
+
+#keys tr, #keys td {
+	vertical-align: bottom;
+}
+
+#credits {
+	float:right;
+	font-size:13px;
 }
 
 a {

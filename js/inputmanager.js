@@ -16,9 +16,6 @@ var InputManager = Class.extend({
 
 	// When jQuery sends keydown event
 	keydownCallback: function(keyCode) {
-		if([keys.down, keys.up, keys.left, keys.right, keys.space].indexOf(keyCode) != -1) {
-			event.preventDefault();
-		}
 		if(this.keysPressed.indexOf(keyCode) == -1) {
 			this.keysPressed.push(keyCode); // Send one time immediately
 			this.keysFrozen.push(keyCode);  // Prevents to send the action 2 times because of MainLoop
@@ -64,6 +61,9 @@ var InputManager = Class.extend({
 			self.game.clickCallback();
 		});
 		$(document).bind('keydown', function(event) {
+			if([keys.down, keys.up, keys.left, keys.right, keys.space].indexOf(event.keyCode) != -1) {
+				event.preventDefault();
+			}
 			self.keydownCallback(event.keyCode);
 		});
 		$(document).bind('keyup', function(event) {

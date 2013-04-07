@@ -7,22 +7,61 @@
 	<link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 <body>
-	<div id="rules">
-		<h3>Règles</h3>
-		Ce Tetris se joue autour de la pièce centrale.<br>
-		Contrôlez une partie du jeu en passant votre souris dessus et dirigez la pièce avec les flèches directionnelles.<br>
-		<br>
-		<h3>Contrôles</h3>
-		<ul>
-			<li>Souris : choisir la zone du jeu active</li>
-			<li>Flèches : déplacer la brique active</li>
-			<li>Clic : Rotation</li>
-		</ul>
-		<input type="button" value="Démarrer" id="start" /><br>
-		<input type="button" value="Isométrique ?" id="triggerIso" /><br>
-		<br>
-		Par <a href="http://yann-p.fr/">Yann P.</a><br />
-		<a href="https://github.com/Yann-P/isotetris/">Sources du jeu</a>
+	<div id="menu">
+		<img src="img/logo.png" id="logo" />
+		<div class="slide" data-title="main">
+
+			
+			
+
+			<table style="width: 100%">
+				<tr id="presentation">
+					<td>
+						<b>IsoTeris</b> est un tetris hors du commun où les briques, venant des 4 côtés du jeu, s'empilent contre la brique centrale du jeu.<br>
+						Oubliez les lignes de tetris, ici, vous devez compléter des carrés !<br>
+						<br>
+						<div id="credits">
+							Par <a href="http://yann-p.fr/">Yann P.</a><br>
+							<a href="https://github.com/Yann-P/isotetris/">Sources du jeu</a>
+						</div>
+					</td>
+					<td><img src="http://i.imgur.com/IqOmNcW.png"></td>
+				</tr>
+				<tr>
+					<td><input type="button" class="button" value="Démarrer" id="start"></td>
+					<td><input type="button" class="button navigation" data-link="tutorial" value="Tutoriel"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="slide" data-title="tutorial">
+			<table>
+				<tr>
+					<td><img src="http://i.imgur.com/xoBoNX2.png"></td>
+					<td><img src="http://i.imgur.com/UynWvnY.png"></td>
+					<td>
+						<h1>Contrôles</h1>
+						<ul>
+							<li><b>Souris</b> : choisir la zone du jeu active</li>
+							<li><b>Flèches</b> : déplacer la brique active (<u>première brique de la zone active</u>)</li>
+							<li><b>Clic ou espace</b> : Rotation</li>
+						</ul>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Les pièces de ce tetris viennent des 4 côtés.<br />
+						Utilisez votre souris pour choisir le côté que vous voulez contrôler.
+					</td>
+					<td>
+						Au lieu de faire des lignes, faites des carrés autour de la pièce centrale.
+					</td>
+					<td>
+						<input type="button" class="button navigation" data-link="main" value="Retour">
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<div id="game">
 		<table id="keys">
