@@ -136,9 +136,11 @@ var Game = Class.extend({
 								y: rowDone.tiles[t][1]
 							});
 						}
+						/* REMOVE THIS: */
 						if(rowDone.distance == 1 && this.grid[23][23] != -1) { // If the fist row was compelted, get rid of the center tile
 							this.removeTile({ x: 23, y: 23 });
 						}
+						/* -- */
 					}
 				}
 			}
